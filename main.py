@@ -54,7 +54,7 @@ class PRNG_Mersenne:
         return self.gen_random_int() / 4294967296  # 0xFFFFFFFF + 1 regel toepassen
 
     def randrange(self, a, b):
-        # Eigen versie van de versie van random.py
+        # Eigen versie van de vorm van random.py
         n = self.random()
         return int(n / (1 / (b - a)) + a)
 

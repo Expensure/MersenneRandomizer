@@ -1,6 +1,5 @@
 import Mersenne
 
-
 def match_chances():
     # Zet alle wedstrijdkansen van een ronde in een lijst
     ajax_thuis = [[0, 0, 100], [65, 17, 18], [54, 21, 25], [74, 14, 12], [78, 13, 9]]
@@ -98,25 +97,77 @@ def result_of_match(code, thuisploeg, uitploeg, scorelijst):
 def final_results():
     #Geeft de winnaar van een ronde
     totaal = play_all()
-    temp_leadingnumber = 0
-    secondary_index = 0
+    teams = ["Ajax", "Feyenoord", "PSV", "FC Utrecht", "Willem II"]
+    temp_teams = teams
+    #Firstplacelist
+    temp_leadingnumber, secondary_index, saving_index = 0, 0, 0
     for i in totaal:
         if i > temp_leadingnumber:
             temp_leadingnumber = i
             winning_team = teams[secondary_index]
+            saving_index = secondary_index
         secondary_index += 1
-    return winning_team
+    temp_teams.remove(temp_teams[saving_index])
+    totaal.remove(totaal[saving_index])
+
+    #Secondplacelist
+    temp_leadingnumber, secondary_index, saving_index = 0, 0, 0
+    for i in totaal:
+        if i > temp_leadingnumber:
+            temp_leadingnumber = i
+            second_team = teams[secondary_index]
+            saving_index = secondary_index
+        secondary_index += 1
+    temp_teams.remove(temp_teams[saving_index])
+    totaal.remove(totaal[saving_index])
+
+    #Thirdplacelist
+    temp_leadingnumber, secondary_index, saving_index = 0, 0, 0
+    for i in totaal:
+        if i > temp_leadingnumber:
+            temp_leadingnumber = i
+            third_team = teams[secondary_index]
+            saving_index = secondary_index
+        secondary_index += 1
+    temp_teams.remove(temp_teams[saving_index])
+    totaal.remove(totaal[saving_index])
+
+    #Fourthplacelist
+    temp_leadingnumber, secondary_index, saving_index = 0, 0, 0
+    for i in totaal:
+        if i > temp_leadingnumber:
+            temp_leadingnumber = i
+            fourth_team = teams[secondary_index]
+            saving_index = secondary_index
+        secondary_index += 1
+    temp_teams.remove(temp_teams[saving_index])
+    totaal.remove(totaal[saving_index])
+
+    #Fifthplacelist:
+    fifth_team = temp_teams[0]
+    return winning_team,second_team,third_team,fourth_team,fifth_team
+
+
 
 def batchrunner(rounds):
-    resultlist = []
+    winlist = []
+    secondlist = []
+    thirdlist = []
+    fourthlist = []
+    fifthlist = []
+    #Maakt tabel van grote batch aan rondes
     for i in range(0, rounds):
-        winner = final_results()
-        resultlist.append(winner)
-    print("Total Number of Times 'Ajax' won = ", resultlist.count('Ajax'), " winning ", round((resultlist.count('Ajax')/rounds)*100,2), " percent of rounds")
-    print("Total Number of Times 'Feyenoord' won = ", resultlist.count('Feyenoord'), " winning ", round((resultlist.count('Feyenoord')/rounds)*100,2), " percent of rounds")
-    print("Total Number of Times 'PSV' won = ", resultlist.count('PSV'), " winning ", round((resultlist.count('PSV')/rounds)*100,2), " percent of rounds")
-    print("Total Number of Times 'FC Utrecht' won = ", resultlist.count('FC Utrecht'), " winning ", round((resultlist.count('FC Utrecht')/rounds)*100,2), " percent of rounds")
-    print("Total Number of Times 'Willem II' won = ", resultlist.count('Willem II'), " winning ", round((resultlist.count('Willem II')/rounds)*100,2), " percent of rounds")
+        winner,second,third,fourth,fifth = final_results()
+        winlist.append(winner)
+        secondlist.append(second)
+        thirdlist.append(third)
+        fourthlist.append(fourth)
+        fifthlist.append(fifth)
+    print ('Ajax      | 1st', round((winlist.count('Ajax')/rounds)*100,2), '%| 2nd', round((secondlist.count('Ajax')/rounds)*100,2), '%| 3rd', round((thirdlist.count('Ajax')/rounds)*100,2), '%| 4th', round((fourthlist.count('Ajax')/rounds)*100,2), '%| 5th', round((fifthlist.count('Ajax')/rounds)*100,2)),'%'
+    print ('Feyenoord | 1st', round((winlist.count('Feyenoord')/rounds)*100,2), '%| 2nd', round((secondlist.count('Feyenoord')/rounds)*100,2), '%| 3rd', round((thirdlist.count('Feyenoord')/rounds)*100,2), '%| 4th', round((fourthlist.count('Feyenoord')/rounds)*100,2), '%| 5th', round((fifthlist.count('Feyenoord')/rounds)*100,2)),'%'
+    print ('PSV       | 1st', round((winlist.count('PSV')/rounds)*100,2), '%| 2nd', round((secondlist.count('PSV')/rounds)*100,2), '%| 3rd', round((thirdlist.count('PSV')/rounds)*100,2), '%| 4th', round((fourthlist.count('PSV')/rounds)*100,2), '%| 5th', round((fifthlist.count('PSV')/rounds)*100,2)),'%'
+    print ('FC Utrecht| 1st', round((winlist.count('FC Utrecht') / rounds) * 100, 2), '%| 2nd',round((secondlist.count('FC Utrecht') / rounds) * 100, 2), '%| 3rd',round((thirdlist.count('FC Utrecht') / rounds) * 100, 2), '%| 4th',round((fourthlist.count('FC Utrecht') / rounds) * 100, 2), '%| 5th',round((fifthlist.count('FC Utrecht') / rounds) * 100, 2)),'%'
+    print ('Willem II | 1st', round((winlist.count('Willem II') / rounds) * 100, 2), '%| 2nd',round((secondlist.count('Willem II') / rounds) * 100, 2), '%| 3rd',round((thirdlist.count('Willem II') / rounds) * 100, 2), '%| 4th',round((fourthlist.count('Willem II') / rounds) * 100, 2), '%| 5th',round((fifthlist.count('Willem II') / rounds) * 100, 2)),'%'
 
 
 rng = Mersenne.PRNG_Mersenne()

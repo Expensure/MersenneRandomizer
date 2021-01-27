@@ -2,6 +2,7 @@ import Mersenne
 
 
 def match_chances():
+    # Zet alle wedstrijdkansen van een ronde in een lijst
     ajax_thuis = [[0, 0, 100], [65, 17, 18], [54, 21, 25], [74, 14, 12], [78, 13, 9]]
     feyenoord_thuis = [[30, 21, 49], [0, 0, 100], [37, 24, 39], [51, 22, 27], [60, 21, 19]]
     psv_thuis = [[39, 22, 39], [54, 22, 24], [0, 0, 100], [62, 20, 18], [62, 22, 16]]
@@ -16,6 +17,7 @@ def match_chances():
 
 
 def all_matches():
+    #Zet alle wedstrijden van een ronde in een lijst
     matching = []
     for i in teams:
         for j in teams:
@@ -25,6 +27,7 @@ def all_matches():
 
 
 def play_all():
+    #Maakt de hele scorelijst van een ronde
     all_chances = match_chances()
     scorelijst = [0, 0, 0, 0, 0]
     matches = all_matches()
@@ -51,7 +54,7 @@ def play_all():
 
 
 def result_of_match(code, thuisploeg, uitploeg, scorelijst):
-    #
+    #Geeft punten aan het thuisteam en uitteam als ze spelen
     if code == 1:
         thuisteamscore = 3
         uitteamscore = 0
